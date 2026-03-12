@@ -1,25 +1,30 @@
 package com.gestao.concursos.controller;
 
-import com.gestao.concursos.model.Concurso;
-import com.gestao.concursos.repository.ConcursoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController // diz ao spring que isso é um endpoint da api
-@RequestMapping("/api/concursos") // url base localhost
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gestao.concursos.model.Concurso;
+import com.gestao.concursos.repository.ConcursoRepository;
+
+@RestController // endpoint da api
+@RequestMapping("/api/concursos") 
 public class ConcursoController {
 
     @Autowired
     private ConcursoRepository repository;
 
-    @GetMapping // ao fazer um get
+    @GetMapping 
     public List<Concurso> listarTodos() {
         return repository.findAll();
     }
 
-    @PostMapping // enviar json para cadastrar concurso
+    @PostMapping 
     public Concurso cadastrar(@RequestBody Concurso concurso) {
         return repository.save(concurso);
     }
